@@ -1,0 +1,116 @@
+html,body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+:root {
+--main-color:#00B5E4; 
+}
+.login_area {
+  width: 518px;
+  height: 339px;
+  border-radius: 5px;
+  background-color: white;
+}
+.icon_chiq {
+background-color:#555555;
+border: none;
+color: white;
+padding:10px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+.login_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 97px;
+}
+.sektor_text {  
+  text-transform: uppercase;
+  color: #00B5E4;
+  margin-left: 10px;
+}
+.input-container {
+  display: flex;
+  border-radius: 3px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: #E3F9FF;
+  margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* Style the input fields */
+.input-field {
+    outline: none;
+    border: none;
+  width: 100%;
+  padding: 10px;
+  color: #00A5D0 !important;
+  outline: none;
+  background-color: #E3F9FF;
+}
+.input-field::placeholder {
+    color: #00A5D0;
+}
+.input-field:focus {
+
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+.login_btn {
+  background: linear-gradient(270deg, #1BC6F2 0%, #00B5E4 100%);
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 10px 45px;
+  cursor: pointer;
+}
+.navbar {
+  background-color: #00B5E4;
+  height: 62px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 52px;
+}
+h5 {
+  color: white;
+}
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+ul li {
+  color: white;
+}
