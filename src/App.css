@@ -1,38 +1,191 @@
-.App {
+html,body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
+}
+:root {
+--main-color:#00B5E4; 
+}
+.login_area {
+  width: 518px;
+  height: 339px;
+  border-radius: 5px;
+  background-color: white;
+}
+.icon_chiq {
+background-color:transparent;
+border: none;
+color: white;
+padding:10px 15px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+}
+.login_content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 40px 97px;
+}
+.sektor_text {  
+  text-transform: uppercase;
+  color: #00B5E4;
+  margin-left: 10px;
+}
+.input-container {
+  display: flex;
+  border-radius: 3px;
+  width: 100%;
+  padding: 0 10px;
+  background-color: #E3F9FF;
+  margin-bottom: 15px;
+}
+
+/* Style the form icons */
+.icon {
+  padding: 10px;
+  background: dodgerblue;
+  color: white;
+  min-width: 50px;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Style the input fields */
+.input-field {
+    outline: none;
+    border: none;
+  width: 100%;
+  padding: 10px;
+  color: #00A5D0 !important;
+  outline: none;
+  background-color: #E3F9FF;
+}
+.input-field::placeholder {
+    color: #00A5D0;
+}
+.input-field:focus {
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Set a style for the submit button */
+.btn {
+  background-color: dodgerblue;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.btn:hover {
+  opacity: 1;
+}
+.login_btn {
+  background: linear-gradient(270deg, #1BC6F2 0%, #00B5E4 100%);
+  border-radius: 3px;
+  outline: none;
+  border: none;
+  color: white;
+  padding: 10px 45px;
+  cursor: pointer;
+}
+.navbar {
+  background-color: #00B5E4;
+  height: 62px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 0 52px;
+}
+h5 {
   color: white;
 }
-
-.App-link {
-  color: #61dafb;
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+}
+ul li {
+  color: white;
+}
+.ot_btn {
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Roboto;
+  padding: 10px 20px;
+  border-radius: 3px;
+  background: linear-gradient(270deg, #1BC6F2 0%, #00B5E4 100%);
+  border: none;
+  outline: none;
+  margin: 5px;
+}
+.ot_btn:first-child {
+  margin-right: 0;
+}
+.ot_btns {
+  text-align: center;
+}
+table {
+  border-collapse: collapse;
+}
+table th {
+  font-weight: 400;
+}
+td {
+  height: 45px;
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.btn_tan {
+  background: #FFDB7F;
+  color: #656565;
+}
+.print_con {
+  width: 794px;
+  margin: 0 auto;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: justify;
+  font-size: 17px;
+  border: 2px solid black;
+  padding: 10px;
+}
+ol {
+  margin: 0;
+}
+h3 {
+  margin: 2px;
+  font-weight: 500;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+ol li {
+  padding: 0 2px;
+}
+.tasdiq {
+  display: flex;
+  text-align: right;
+  width: 33.3333%;
+  align-items: center ;
+}
+.tasdiq_con {
+  display: flex;
+  justify-content: center;
+}
+.hot_btn {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
 }
