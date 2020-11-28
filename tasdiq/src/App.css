@@ -1,0 +1,270 @@
+html,body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+:root {
+  --main-color:#00B5E4; 
+}
+.login_area {
+    width: 518px;
+    height: 339px;
+    border-radius: 5px;
+    background-color: white;
+}
+.icon_chiq {
+  background-color:transparent;
+  border: none;
+  color: white;
+  padding:10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+.login_content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 97px;
+}
+.sektor_text {  
+    text-transform: uppercase;
+    color: #00B5E4;
+    margin-left: 10px;
+}
+.input-container {
+    display: flex;
+    border-radius: 3px;
+    width: 100%;
+    padding: 0 10px;
+    background-color: #E3F9FF;
+    margin-bottom: 15px;
+  }
+  
+  /* Style the form icons */
+  .icon {
+    padding: 10px;
+    background: dodgerblue;
+    color: white;
+    min-width: 50px;
+    text-align: center;
+  }
+  
+  /* Style the input fields */
+  .input-field {
+      outline: none;
+      border: none;
+    width: 100%;
+    padding: 10px;
+    color: #00A5D0 !important;
+    outline: none;
+    background-color: #E3F9FF;
+  }
+  .input-field::placeholder {
+      color: #00A5D0;
+  }
+  .input-field:focus {
+
+  }
+  
+  /* Set a style for the submit button */
+  .btn {
+    background-color: dodgerblue;
+    color: white;
+    padding: 15px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+  }
+  
+  .btn:hover {
+    opacity: 1;
+  }
+  .login_btn {
+    background: linear-gradient(270deg, #1BC6F2 0%, #00B5E4 100%);
+    border-radius: 3px;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 10px 45px;
+    cursor: pointer;
+  }
+  .navbar {
+    background-color: #00B5E4;
+    height: 62px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 52px;
+  }
+  h5 {
+    color: white;
+  }
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+  }
+  ul li {
+    color: white;
+  }
+.monitor_content {
+  margin: 17px 32px;
+  padding: 16px 32px;
+  background-color: white;
+}
+.monitor_content_head {
+  display: flex;
+  justify-content: space-between;
+}
+.monitor_body {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.monitor_left {
+  width: 24%;
+}
+.monitor_right {
+  overflow-x: auto;
+  width: 75%;
+}
+.monitor_table {
+  border-spacing: 0;
+  border-collapse: collapse;
+  
+}
+.monitor_table td {
+  height: 60px !important;
+  border: 1px solid #ddd;
+  font-size: 12px;
+  padding: 0;
+  text-align: center;
+  box-sizing: border-box;
+}
+.monitor_table tr {
+  margin: 5px 0;
+}
+.monitor_table th {
+  font-size: 13px;
+  padding:5px;
+  height: 68px;
+  box-sizing: border-box;
+  font-weight: normal;
+}
+.tuman_contentli {
+  color: #7D7D7D;
+  background: #F1F1F1;
+}
+.tuman_contentsiz {
+  color: white;
+  background: linear-gradient(270deg, #1BC6F2 0%, #00B5E4 100%);
+}
+.tuman_edit {
+  background: #E3F9FF;
+  color: #00A6D1;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type=number] {
+  -moz-appearance: textfield;
+  width: 90%;
+  height: 90%;  
+  font-size: 20px;
+  color: #00B5E4;
+  text-align: center;
+  background-color: white;
+  border-color: #00B5E4;
+  border-style: solid;
+  border: none
+}
+input[type=number]:focus {
+  outline-color: #00B5E4;
+}
+.input_edit {
+  color: #00B5E4;
+  border: 2px !important;
+  border-color: #00B5E4 !important;
+  border-style: solid !important;
+}
+.iz_btn {
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 10px;
+  margin: 4px 2px;
+  
+  background-color: white; 
+  color: #ddd; 
+  border: none;
+  border-radius: 3px;
+  
+}
+.hov {
+  cursor: pointer;
+}
+.hov:hover {
+  background-color: #00B5E4;
+  color: white;
+}
+.hov:focus {
+  outline: none;
+}
+.hot_btn {
+  background-color: #008CBA;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+
+
+div[contenteditable="true"] {
+  overflow-y: scroll;
+  min-height: 200px;
+  max-height: 200px;
+}
+.ot_btn {
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: Roboto;
+  padding: 10px 20px;
+  border-radius: 3px;
+  background: linear-gradient(270deg, #1BC6F2 0%, #00B5E4 100%);
+  border: none;
+  outline: none;
+  margin: 5px;
+}
+.ot_btn:first-child {
+  margin-right: 0;
+}
+.ot_btns {
+  text-align: center;
+} 
+.btn_tan {
+  background: #FFDB7F;
+  color: #656565;
+}
+.btn_tas {
+  background-color: #38C147 !important;
+}
