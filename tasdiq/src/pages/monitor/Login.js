@@ -11,7 +11,7 @@ const Login = () => {
     const [parol, setParol]= useState("")
     const [monitorState, setMonitorState]= useState(null)
     useEffect(()=> {
-        const monitor = window.localStorage.getItem("monitor")
+        const monitor = window.localStorage.getItem("checker")
         setMonitorState(monitor)
 
     }, [])

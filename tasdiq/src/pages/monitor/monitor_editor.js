@@ -1,19 +1,16 @@
 import React, {useEffect} from 'react'
-import { DefaultEditor } from 'react-simple-wysiwyg';
 import Buttonlar from './Buttonlar'
+import { Editor } from '@tinymce/tinymce-react';
 import {connect} from 'react-redux'
 import {setIz,closeModal} from '../../actions/userActions'
 
-const Editor = ({setIz,iz, btn_iz,closeModal, hotlinks}) => {
+const Editor1 = ({setIz,iz, btn_iz,closeModal, hotlinks}) => {
     const [html, setHtml] = React.useState('');
     useEffect(() => {
             if(iz[btn_iz]) {
                 setHtml(iz[btn_iz])
             }   
     }, [])
-    const onChange = (e) => {
-      setHtml(e.target.value);
-    };
     const Add = (data) => {
         setHtml(html + data)
     }
@@ -49,7 +46,29 @@ const Editor = ({setIz,iz, btn_iz,closeModal, hotlinks}) => {
         <div>
             <h2 id="simple-modal-title">{head}</h2>
             {btns.map((btn, index)=> <Buttonlar Add={Add} key={index} btn={btn}></Buttonlar>)}
-             <DefaultEditor style={{maxHeight:"230px", minHeight: "200px"}} value={html} onChange={onChange} />
+
+            <Editor
+                    style={{minHeight: "50%"}}
+                    value={html}
+                    outputFormat='html'
+                    apiKey="5s5wv4wvh0agbh1msrx9iuw2k61cn12nrrgeulvxwat79o5r"
+                    init={{
+                        height: 500,
+                        
+                        menubar: false,
+                        menubar: 'file edit view format tools table help',
+                        plugins: [
+                        'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap emoticons'
+                        ],
+                        toolbar:
+                        'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print |  ltr rtl'
+                    }}
+                    onEditorChange={(content)=> {
+                        setHtml(content)
+                    }
+                    }
+                    />
+
               <center><button onClick={addIz}  style={{marginTop: "10px"}} className="hot_btn">Saqlash</button><button onClick={closeModal}  style={{marginTop: "10px",marginLeft: "7%", backgroundColor: "#51686C"}} className="hot_btn">Бекор қилиш</button></center>
         </div>
          )
@@ -69,4 +88,4 @@ const mapStateToProps = (state)=> {
       hotlinks: state.curInfo.hotlinks
     }
   }
-export default connect(mapStateToProps, {setIz, closeModal})(Editor)
+export default connect(mapStateToProps, {setIz, closeModal})(Editor1)

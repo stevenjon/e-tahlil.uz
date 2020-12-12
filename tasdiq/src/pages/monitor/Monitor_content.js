@@ -1,32 +1,43 @@
 import React, { useEffect, useState } from 'react'
-import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
+import { DatePicker } from 'antd';
+import 'antd/dist/antd.css';
+import moment from 'moment'
 import Monitor_body from './Monitor_body'
 import M from 'moment'
 import {connect} from 'react-redux'
 import axios from 'axios'
 import baseUrl from '../../baseUrl'
+import Loader from './Loader'
 import {toast} from 'react-toastify'
-import {getHotLinks,setDate, getTumanlar,getBaholar, setTasdiq} from '../../actions/userActions'
-const useStyles = makeStyles((theme) => ({
-    container: {
-      display: 'flex',
-      flexWrap: 'wrap',
-    },
-    textField: {
-      marginLeft: theme.spacing(1),
-      marginRight: theme.spacing(1),
-      width: 200,
-    },
-  }));
-const Monitor_content = ({getHotLinks,chach,setDate,date,tasdiq, getTumanlar,getBaholar, setTasdiq}) => {
+import {Link} from 'react-router-dom'
+import 'moment/locale/ru';
+import locale from 'antd/es/date-picker/locale/ru_RU';
+import {getHotLinks,setDate, getTumanlar,setPrint,getBaholar, setTasdiq, setSec} from '../../actions/userActions'
+function getWithExpiry() {
+	const itemStr = localStorage.getItem("tdate")
+	// if the item doesn't exist, return null
+	if (!itemStr) {
+		return null
+	}
+	const item = JSON.parse(itemStr)
+	const now = new Date()
+	// compare the expiry time of the item with the current time
+	if (now.getTime() > item.expiry) {
+		// If the item is expired, delete the item from storage
+		// and return null
+		localStorage.removeItem("tdate")
+		return null
+	}
+	return item.value
+}
+const Monitor_content = ({getHotLinks,setSec,setPrint,chach,setDate,date,tasdiq, getTumanlar,getBaholar, setTasdiq}) => {
     const [clock, setClock] = useState()
     const [checker, setChecker] = useState()
     const [cursec, setCursec] = useState(1)
     useEffect(() => {
         getChecker()
-        const currentDate = M().format("yyyy-MM-DD")
-        setDate(currentDate)
+        const currentDate = getWithExpiry()
+        setDate(currentDate ? currentDate: M().subtract(1, 'days').format("yyyy-MM-DD"))
         setClock(M().format("H:mm"))
         setInterval(() => {
             setClock(M().format("H:mm"))
@@ -36,15 +47,15 @@ const Monitor_content = ({getHotLinks,chach,setDate,date,tasdiq, getTumanlar,get
         getBaholar(cursec)
         
     }, [])
-    const classes = useStyles();
-    const dateHandler = (e) => {
-        setDate(e.target.value)
-        console.log("date  cg")
-        getBaholar(cursec)    
+  
+    const dateHandler = (value) => {
+        setDate(M(value).format("YYYY-MM-DD"))
+        
+    
     }
     const removeMonitor = ()=> {
         window.localStorage.removeItem("checker")
-        window.localStorage.removeItem("monitor")
+
         window.location.reload()
     }
     const getChecker = async ()=> {
@@ -94,6 +105,16 @@ const Monitor_content = ({getHotLinks,chach,setDate,date,tasdiq, getTumanlar,get
         
 
     }
+    const dateFormat = 'YYYY-MM-DD';
+    const Refresh = ()=> {
+        const now = new Date()
+        const item = {
+            value: date,
+            expiry: now.getTime() + 7200000,
+        }
+        localStorage.setItem("tdate", JSON.stringify(item))
+        getBaholar(cursec)
+    }
     return (
         <div style={{backgroundColor: "#E5E5E5", width: "100vw", height: "100%"}}>
             <div className="navbar">
@@ -116,19 +137,23 @@ const Monitor_content = ({getHotLinks,chach,setDate,date,tasdiq, getTumanlar,get
                 <button onClick={()=>{
                     getBaholar(1) 
                     setCursec(1)
+                    setSec(1)
                 } 
                     } className={cursec == 1 ? "ot_btn btn_tan": "ot_btn"}>1-сектор</button>
                 <button onClick={()=>{
                     getBaholar(2) 
                     setCursec(2)
+                    setSec(2)
                 }} className={cursec==2 ? "ot_btn btn_tan": "ot_btn"}>2-сектор</button>
                 <button onClick={()=> {
                     getBaholar(3) 
                     setCursec(3)
+                    setSec(3)
                 }} className={cursec== 3 ? "ot_btn btn_tan": "ot_btn"}>3-сектор</button>
                 <button onClick={()=> {
                     getBaholar(4) 
                     setCursec(4)
+                    setSec(4)
                 }} className={cursec== 4 ? "ot_btn btn_tan": "ot_btn"}>4-сектор</button>
                     </div>
                     <div className="clock" style={{textAlign: "center"}}>
@@ -139,25 +164,17 @@ const Monitor_content = ({getHotLinks,chach,setDate,date,tasdiq, getTumanlar,get
                             </p>
                     </div>
                     <div className="monitor_calendar">
-                        {date ? <form className={classes.container} noValidate>
-                        <TextField
-                            id="date"
-                            label="Бахолаш вақти"
-                            type="date"
-                            defaultValue= {date}
-                            className={classes.textField}
-                            onChange={dateHandler}
-                            InputLabelProps={{
-                            shrink: true,
-                            }}
-                        />
-                        </form>: null}
-                    
+                        {date ? <div style={{display:"flex", alignItems:"center"}}>
+                        <DatePicker locale={locale} style={{border: "1px solid var(--main-color)"}} defaultValue={moment(date, dateFormat)}  onChange={(date) => dateHandler(date)} format={dateFormat} /><div onClick={Refresh} style={{cursor: "pointer", margin: "25px 15px", color: "var(--main-color)", fontSize:"18px"}}><i class="fas fa-redo"></i></div>
+                        
+                        </div>: null}
+                        <div  style={{cursor: "pointer"}}><Link to='/print'><img src="/print.svg"></img></Link></div>
                     </div>
                 </div>
                 {date ?  <Monitor_body date={date} sec={cursec}>
 
-                </Monitor_body>: null}
+                </Monitor_body>: <Loader></Loader>}
+             
                
             </div>
         </div>
@@ -168,7 +185,8 @@ const mapStateToProps = (state)=> {
       date: state.curInfo.date,
       tumanlar: state.curInfo.tumanlar,
       tasdiq: state.curInfo.tasdiq,
-      chach: state.curInfo.chachishgan
+      chach: state.curInfo.chachishgan,
+      load: state.curInfo.load
     }
   }
-export default connect(mapStateToProps, {getHotLinks,setDate,setTasdiq, getTumanlar,getBaholar})(Monitor_content)
+export default connect(mapStateToProps, {getHotLinks,setSec, setPrint,setDate,setTasdiq, getTumanlar,getBaholar})(Monitor_content)

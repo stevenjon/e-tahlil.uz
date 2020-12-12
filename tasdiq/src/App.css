@@ -2,7 +2,7 @@ html,body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
 :root {
   --main-color:#00B5E4; 
@@ -109,13 +109,13 @@ html,body {
   ul {
     list-style: none;
     display: flex;
+    margin: 0 !important;
     flex-direction: row;
   }
   ul li {
     color: white;
   }
 .monitor_content {
-  margin: 17px 32px;
   padding: 16px 32px;
   background-color: white;
 }
@@ -154,7 +154,8 @@ html,body {
 .monitor_table th {
   font-size: 13px;
   padding:5px;
-  height: 68px;
+  text-align: center !important;
+  height: 90px;
   box-sizing: border-box;
   font-weight: normal;
 }
@@ -204,7 +205,7 @@ input[type=number]:focus {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 10px;
+  font-size: 15px;
   margin: 4px 2px;
   
   background-color: white; 
@@ -227,11 +228,10 @@ input[type=number]:focus {
   background-color: #008CBA;
   border: none;
   color: white;
-  padding: 10px 15px;
+  padding: 5px 10px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
   margin: 4px 2px;
   cursor: pointer;
 }
@@ -267,4 +267,76 @@ div[contenteditable="true"] {
 }
 .btn_tas {
   background-color: #38C147 !important;
+}
+.monitor_calendar {
+  display: flex;
+  align-items: center;
+}
+.print_con {
+  width: 841px;
+  margin: 0 auto;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: justify;
+  font-size: 17px;
+  border: 1px solid white;
+  padding: 10px;
+}
+ol {
+  margin: 0;
+}
+h3 {
+  margin: 2px;
+  font-weight: 600;
+}
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right:0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.tox {
+  height: 350px !important;
+}
+p {
+  margin: 0 !important;
 }

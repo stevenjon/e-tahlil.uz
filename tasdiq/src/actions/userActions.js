@@ -1,4 +1,4 @@
-import  {SET_CURINFO,SET_INFO,GET_TUMANLAR,SET_CHACH, GET_BAHOLAR, SET_BTN_IZ, SET_TUMAN_ID, SET_INPUTS, SET_MODAL, CLOSE_MODAL, SET_IZ, SET_DATE, CLEAR_INFO, SET_HOTLINKS, SET_TASDIQ} from './types.js';
+import  {SET_CURINFO,SET_INFO,GET_TUMANLAR,SET_CHACH,SET_MODAL2, SET_PRINT, GET_BAHOLAR, SET_BTN_IZ, SET_TUMAN_ID, SET_INPUTS, SET_MODAL, CLOSE_MODAL, SET_IZ, SET_DATE, CLEAR_INFO, SET_HOTLINKS, SET_TASDIQ, SET_LOAD, CLOSE_MODAL2, SET_SEC} from './types.js';
 import baseUrl from '../baseUrl'
 import axios from 'axios'
 
@@ -13,12 +13,26 @@ export const setCurInfo1 = (data) => dispatch =>  {
             type: SET_CURINFO,
             payload: data
         })
+
 }
+export const setSec = (data) => dispatch =>  {
+    dispatch({
+        type: SET_SEC,
+        payload: data
+    })
+}
+
 export const setBtnIz = (data) => dispatch =>  {
         dispatch({
             type: SET_BTN_IZ,
             payload: data
         })
+}
+export const setLoad = (data) => dispatch =>  {
+    dispatch({
+        type: SET_LOAD,
+        payload: data
+    })
 }
 export const setChach = (data) => dispatch =>  {
     dispatch({
@@ -51,9 +65,21 @@ export const handleOpen = () =>  dispatch =>  {
         payload: true
     })
 }
+export const handleOpen1 = () =>  dispatch =>  {
+    dispatch({
+        type: SET_MODAL2,
+        payload: true
+    })
+}
 export const closeModal = () =>  dispatch =>  {
     dispatch({
         type: CLOSE_MODAL,
+        payload: false
+    })
+}
+export const closeModal2 = () =>  dispatch =>  {
+    dispatch({
+        type: CLOSE_MODAL2,
         payload: false
     })
 }
@@ -88,9 +114,12 @@ export const getTumanlar =  () =>async (dispatch)=> {
 
 
 export const getBaholar =  (id) => async (dispatch, getState) =>  {
-
+    dispatch({
+        type: SET_LOAD,
+        payload: true
+         })
     getHotLinks()
-    let tasdiq
+    let tasdiq=[]
     let formData = new FormData();
         formData.append('date', getState().curInfo.date)
         formData.append('sec_soni', id)
@@ -111,34 +140,49 @@ export const getBaholar =  (id) => async (dispatch, getState) =>  {
                             
 
                           })
-                  
+                         const sortedJ = javob.sort(function(a,b) {
+                            let x,y
+                            if(b.content.length > 0 && a.content.length > 0) {   
+                                x =  b.content[0].jami
+                                y =  a.content[0].jami
+                             }else {
+                                 x= 0
+                                 y= 0
+                             }
+
+                             return x - y
+                           
+                        })
                         switch (window.localStorage.getItem("checker")) {
                             case "1":
-                                tasdiq = data.length > 0 ? data.filter((d)=> d.status == 0): [1,2];
+                                tasdiq = data.length > 0 ? data.filter((d)=> d.status == "0"): [1,2];
                                 break;
                                 case "2":
-                                    tasdiq = data.length > 0 ? data.filter((d)=> d.status2 == 0): [1,2];
+                                    tasdiq = data.length > 0 ? data.filter((d)=> d.status2 == "0"): [1,2];
                                     break;
                                 case "3":
-                                    tasdiq = data.length > 0 ? data.filter((d)=> d.status3 == 0): [1,2];
+                                    tasdiq = data.length > 0 ? data.filter((d)=> d.status3 == "0"): [1,2];
                                     break;
                             default:
                                 break;
                         }  
                         
-                        
+                            
                                         
                           dispatch({
                             type: GET_BAHOLAR,
-                            payload: javob
+                            payload: sortedJ
                              })
+
+                             dispatch({
+                                type: SET_LOAD,
+                                payload: false
+                                 })
                         }
                     } catch (err) {
                         // Handle Error Here
                         console.error(err);
                     }
-
-
                     if(tasdiq.length > 0) {
                     
                         dispatch({
@@ -151,6 +195,8 @@ export const getBaholar =  (id) => async (dispatch, getState) =>  {
                             payload: true
                         })
                     }
+
+                    
                    
 }
 export const clearInfo = () => dispatch =>  {
@@ -189,8 +235,11 @@ export const getHotLinks = () =>async dispatch =>  {
     } catch (err) {
         // Handle Error Here
         console.error(err);
-    }
-
-
-   
+    }  
+}
+export const setPrint = (data = true) => dispatch =>  {
+    dispatch({
+        type: SET_PRINT,
+        payload: data
+    })  
 }
