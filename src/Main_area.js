@@ -1,14 +1,16 @@
-import React from 'react'
+import React, {Fragment, useState} from 'react'
 import Content from './Content'
+import Loader from './Loader'
 
   
 const Main_area = ({sCon, sPrint, sD, setS}) => {
-        
+     const [load, setLoad] = useState(true)   
     const removeUser = ()=> {
         window.localStorage.removeItem("user")
         window.location.reload()
     }
     return (
+        <Fragment>
         <div>
             <div className="navbar">
                 <div className="navbar_brand">
@@ -24,8 +26,14 @@ const Main_area = ({sCon, sPrint, sD, setS}) => {
                     </ul>
                 </div>
             </div>
-            <Content sCon={sCon} sPrint={sPrint} sD={sD} setS={setS}></Content>
+
+               <Content sCon={sCon} sPrint={sPrint} sD={sD} setL={setLoad} setS={setS}></Content>
+            
+            
         </div>
+        {load ? <Loader></Loader>: null}
+             
+        </Fragment>
     )
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactHtmlParser from 'react-html-parser'
 
+
 const Pbody = ({info}) => {
     let fio;
     let kor = true;
@@ -32,15 +33,14 @@ const Pbody = ({info}) => {
     }else {
         kor = false
     }
-    console.log(kor)
     if(kor) {
         return (
-            <div style={{display: "flex", flexDirection:"column", justifyContent:"center", alignItems: "center"}}>
-                <h3 style={{margin:"0"}}>{info.tuman_name} {xok}  {fio} ({info.um_ish_et_3 && parseInt(info.um_ish_et_3)} Балл)</h3>
-                <p style={{margin:"0"}}>Юборилган вакти ({info.tav_muvof} балл): {info.tav_muvof_iz ? ReactHtmlParser(info.tav_muvof_iz): "Изох қўйилмаган"}</p>
-                <p style={{margin:"0"}}>Тавсияларга мувофиқлиги ({info.b_sif} балл): {info.b_sif_iz ? ReactHtmlParser(info.b_sif_iz) : "Изох қўйилмаган"}</p>
-                <p style={{margin:"0"}}>Бажарилган ишлар таҳлилий ({info.um_ish_t_et1} балл): {info.um_ish_t_et1_iz ? ReactHtmlParser(info.um_ish_t_et1_iz): "Изох қўйилмаган"}</p>
-                <p style={{margin:"0"}}>Бажарилиш сифати (Фотофактлар) ({info.um_ish_t_et} балл): {info.um_ish_t_et_iz ? ReactHtmlParser(info.um_ish_t_et_iz):"Изох қўйилмаган" }</p>
+            <div style={{display: "flex", flexDirection:"column", justifyContent:"center", marginBottom:"10px", whiteSpace: "normal", wordBreak: "break-word"}}>
+                <h3 style={{margin:"5px", textAlign: "center", fontWeight:'bold'}}>{info.tuman_name} {xok}  {fio} ({info.um_ish_et_3 && parseInt(info.um_ish_et_3)} Балл)</h3>
+                <p style={{margin:"2px", textAlign: "justify", textIndent: "40px"}}>{info.tav_muvof_iz ? ReactHtmlParser(info.tav_muvof_iz): ""}</p>
+                <p style={{margin:"2px", textAlign: "justify", textIndent: "40px"}}>{info.um_ish_t_et_iz ? ReactHtmlParser(info.um_ish_t_et_iz):"" }</p>
+                <p style={{margin:"2px", textAlign: "justify", textIndent: "40px"}}>{info.b_sif_iz ? ReactHtmlParser(info.b_sif_iz) : ""}</p>
+                <p style={{margin:"2px", textAlign: "justify", textIndent: "40px"}}>{info.um_ish_t_et1_iz ? ReactHtmlParser(info.um_ish_t_et1_iz): ""}</p>
                 
             </div>
         )

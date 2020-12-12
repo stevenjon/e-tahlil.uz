@@ -18,8 +18,8 @@ function getModalStyle() {
 const useStyles = makeStyles((theme) => ({
   paper: {
     position: 'absolute',
-    width: 400,
-    height: 200,
+    width: "50%",
+    maxHeight: "50%",
     overflowY: "auto",
     backgroundColor: theme.palette.background.paper,
     border: '2px solid #555',
@@ -39,10 +39,10 @@ function SimpleModal({open=false, content, closeModal}) {
 
   const body = (
     <div style={modalStyle} className={classes.paper}>
-        <center><h3>{content.tuman_name} <span>{content.sec}-сектор</span></h3></center>
-  <center><span style={{color: "var(--main-color)"}}>{content.nim} ({content.baho}%)</span></center>
-        {ReactHtmlParser(content.text)}
-        <div><button onClick={closeModal}  style={{marginTop: "10px", marginLeft: "80%",letterSpacing:"3px", backgroundColor: "#51686C"}} className="hot_btn">Орқага</button></div>
+        <center><h3 style={{marginBottom:"5px"}}>{content.tuman_name} <span>{content.sec}-сектор</span></h3></center>
+  <center style={{marginBottom:"5px"}}><span style={{color: "var(--main-color)"}}>{content.nim} ({content.baho}%)</span></center>
+        <center>{ReactHtmlParser(content.text)}</center>
+        <div onClick={closeModal}  style={{letterSpacing:"3px", color: "red", position: "absolute", right: "10px", top: "1px",cursor:"pointer", fontSize: "30px"}}>&times;</div>
     </div>
   );
   return (

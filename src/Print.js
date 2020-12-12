@@ -1,6 +1,8 @@
 import React, {useState, Fragment} from 'react'
 import Phead from './PrintHead'
 import Pbody from './Pbody'
+import {Link} from 'react-router-dom'
+
 const Print = ({sP, Con,d,s}) => {
 
     const [p,setP]= useState(true)
@@ -8,7 +10,7 @@ const Print = ({sP, Con,d,s}) => {
     let content2
     let content3
     let content4
-    if(Con.length > 70) {
+    if(Con && Con.length > 70) {
         const maped1 = Con.filter((m) => m.s1 == 1 ).map((x)=> {
             const obj = {...x}
             obj.soni = 1
@@ -42,7 +44,7 @@ const Print = ({sP, Con,d,s}) => {
         setP(false)
         setTimeout(()=> {
             window.print()
-            sP(false)
+            
         }, 100)
     }
     const back = ()=> {
@@ -51,10 +53,10 @@ const Print = ({sP, Con,d,s}) => {
     return (
         <Fragment>
             <div style={{display: "flex", justifyContent:"space-between"}}>
-                 {p ? <div onClick={back} style={{cursor: "pointer", margin: "10px 30px", color:"var(--main-color)", fontSize:"20px"}}><i class="fas fa-arrow-alt-circle-left"></i></div>: null} 
-                 {p ? <div onClick={sa} style={{cursor: "pointer", margin: "10px 30px"}}><img src="/print.svg"></img></div>: null} 
+                 {p ? <div style={{cursor: "pointer", margin: "10px 30px", color:"var(--main-color)", fontSize:"20px"}}><Link to="/">Орқага</Link></div>: null} 
+                 {p ? <div onClick={sa} style={{cursor: "pointer", margin: "15px 30px"}}><img src="/print.svg"></img></div>: null} 
             </div>      
-        <div className="print_con">
+        <div className={p ? "print_con": "print_con_no_b"}>
             {content ? <Phead d={d} s={s ? s:"1"}></Phead>: null}
             {content ? content.map(m => <Pbody info={m}></Pbody>): null}
 
