@@ -1,4 +1,4 @@
-import  {SET_BTN_IZ, SET_CURINFO, SET_INPUTS, SET_TUMAN_ID, SET_MODAL, CLOSE_MODAL, SET_IZ, SET_DATE, GET_TUMANLAR, CLEAR_INFO, GET_BAHOLAR, SET_CHACH, SET_INFO, SET_HOTLINKS} from '../actions/types.js';
+import  {SET_BTN_IZ, SET_CURINFO,SET_PRINT, SET_INPUTS, SET_TUMAN_ID,SET_LOAD, SET_MODAL, CLOSE_MODAL, SET_IZ, SET_DATE, GET_TUMANLAR, CLEAR_INFO, GET_BAHOLAR, SET_CHACH, SET_INFO, SET_HOTLINKS, SET_TASDIQ} from '../actions/types.js';
 
 const initialScale = {
     info: {},
@@ -9,7 +9,10 @@ const initialScale = {
     btn_iz: "",
     info4: false,
     chachishgan: [],
-    hotlinks: []
+    hotlinks: [],
+    print: false,   
+    load: true,
+    tasdiq: false
 }
 
 export default (state = initialScale, action) => {
@@ -29,10 +32,26 @@ export default (state = initialScale, action) => {
                 ...state,
                 tuman_id: action.payload
             }
+            case SET_PRINT:
+            return {
+                ...state,
+                print: action.payload
+                
+            }
             case SET_INPUTS:
             return {
                 ...state,
                 info:Object.assign(state.chachishgan[action.id].content, action.payload)
+            }
+            case SET_LOAD:
+            return {
+                ...state,
+                load: action.payload
+            }
+            case SET_TASDIQ:
+            return {
+                ...state,
+                tasdiq: action.payload
             }
             case SET_MODAL:
             return {

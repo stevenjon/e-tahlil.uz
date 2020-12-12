@@ -1,4 +1,4 @@
-import  {SET_CURINFO,SET_INFO,GET_TUMANLAR,SET_CHACH, GET_BAHOLAR, SET_BTN_IZ, SET_TUMAN_ID, SET_INPUTS, SET_MODAL, CLOSE_MODAL, SET_IZ, SET_DATE, CLEAR_INFO, SET_HOTLINKS} from './types.js';
+import  {SET_CURINFO,SET_INFO,SET_PRINT,GET_TUMANLAR,SET_CHACH,SET_LOAD, GET_BAHOLAR, SET_BTN_IZ, SET_TUMAN_ID, SET_INPUTS, SET_MODAL, CLOSE_MODAL, SET_IZ, SET_DATE, CLEAR_INFO, SET_HOTLINKS, SET_TASDIQ} from './types.js';
 import baseUrl from '../baseUrl'
 import axios from 'axios'
 
@@ -88,8 +88,13 @@ export const getTumanlar =  () =>async (dispatch)=> {
 
 
 export const getBaholar =  () => async (dispatch, getState) =>  {
+    dispatch({
+        type: SET_LOAD,
+        payload: true
+         })
     getHotLinks()
     let formData = new FormData();
+    let chn =[]
         formData.append('date', getState().curInfo.date)
         formData.append('sec_soni', window.localStorage.getItem("monitor"))
                     try {
@@ -106,13 +111,48 @@ export const getBaholar =  () => async (dispatch, getState) =>  {
                               newObj.content = data ==="" || data.length > 0 ? data.filter((baho)=> baho.tuman_id === tuman.id): [];
                               return newObj;    
 
+
+
+
+
+                              
                           })
+
+                          const maped111 = data.filter((m)=> m.status == 1)
+                          if(maped111.length > 0) {
+                              chn.push(1)
+                       
+                          }
+                          const maped221 = data.filter((m)=> m.status2 == 1)
+                          if(maped221.length > 0) {
+                              chn.push(2)
                         
+                          }
+                          const maped331 = data.filter((m)=> m.status3 == 1)
+                          if(maped331.length > 0) {
+                              chn.push(3)
+                             
+                          }
+                          if(chn.length > 0) {
+                            dispatch({
+                                type: SET_TASDIQ,
+                                payload: true
+                            })
+                          }else {
+                            dispatch({
+                                type: SET_TASDIQ,
+                                payload: false
+                            })
+                          }
                             
                           dispatch({
                             type: GET_BAHOLAR,
                             payload: javob
                              })
+                             dispatch({
+                                type: SET_LOAD,
+                                payload: false
+                                 })
                         }
                     } catch (err) {
                         // Handle Error Here
@@ -154,4 +194,11 @@ export const getHotLinks = () =>async dispatch =>  {
 
 
    
+}
+
+export const setPrint = (data = true) => dispatch =>  {
+    dispatch({
+        type: SET_PRINT,
+        payload: data
+    })  
 }

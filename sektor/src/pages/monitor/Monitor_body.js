@@ -3,11 +3,10 @@ import Tumanlar from './Tumanlar'
 import Royxatlar from './Royxatlar'
 import Modal from './monitor_modal'
 import {connect} from 'react-redux'
-import Loader from 'react-loader-spinner'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+import Loader from './Loader'
 import { getTumanlar, getBaholar, setChach, setInfo3} from '../../actions/userActions'
 
-const Monitor_body = ({info4,chachishgan, tumanlar, getBaholar, setChach, setInfo3}) => {
+const Monitor_body = ({info4,chachishgan, tumanlar, getBaholar, setChach, setInfo3, load}) => {
     const [ozgar, setOzgar]= useState(false)
      useEffect(() => {
          
@@ -38,7 +37,7 @@ const Monitor_body = ({info4,chachishgan, tumanlar, getBaholar, setChach, setInf
         return (
             <div className="monitor_body">
                 <div className="monitor_left">
-                    <h6 style={{fontSize: "16px",height: "68px",boxSizing: "border-box",margin:"0", verticalAlign: "middle", color: "#747474", fontWeight: "normal",backgroundColor:"#FCFCFC", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center"}}><p style={{margin: "0"}}>Шахар туманлар номи</p></h6>
+                    <h6 style={{fontSize: "16px",height: "111px",boxSizing: "border-box",margin:"0", verticalAlign: "middle", color: "#747474", fontWeight: "normal",backgroundColor:"#FCFCFC", textAlign: "center", display: "flex", justifyContent: "center", alignItems: "center"}}><p style={{margin: "0"}}>Шахар туманлар номи</p></h6>
                     {chachishgan.map((chach, index)=> <Tumanlar tumanHandler={tumanHandler} key={index} info={chach}></Tumanlar>)}   
                 </div>
                 <div className="monitor_right">
@@ -50,13 +49,13 @@ const Monitor_body = ({info4,chachishgan, tumanlar, getBaholar, setChach, setInf
                         <th>Изох</th>
                         <th>Тавсияларга мувофиқлиги(%)</th>
                         <th>Изох</th>
-                        <th>Иш режа бажарилиши таҳлилий (%)</th>
-                        <th>Бажарилган ишлар таҳлилий (%)</th>
+                        <th>Бажарилиш кўрсаткичи (%)</th>
+                        <th>Бажарилган ишлар маълумоти (%)</th>
                         <th>Изох</th>
-                        <th>Бажарилган ишларни фотосуратлари(%)</th>
+                        <th>Бажарилиш сифати (Фотофактлар) %</th>
                         <th>Изох</th>
-                        <th>Бажарилган ишларни умумий (%)</th>
-                        <th>Умум тахлилий (%)</th> 
+                        <th>Ишлар ташкил этилганлик кўрсаткичи (%)</th>
+                        <th>Тахлилий кўрсаткич (%)</th> 
                         <th></th>
                         <th></th>
                         
@@ -69,20 +68,12 @@ const Monitor_body = ({info4,chachishgan, tumanlar, getBaholar, setChach, setInf
                     </table>
                 </div>
                <Modal></Modal>
+               {load ? <Loader></Loader>: null}
             </div>
         )
     }else {
         return (
-            <center>
-            <Loader
-         type="ThreeDots"
-         color="#00BFFF"
-         height={100}
-         width={100}
-         timeout={3000} //3 secs
- 
-      />
-      </center>
+            <Loader></Loader>
         )
     }
     
@@ -91,7 +82,8 @@ const mapStateToProps = (state)=> {
     return {
       chachishgan: state.curInfo.chachishgan,
       tumanlar: state.curInfo.tumanlar,
-      info4: state.curInfo.info4
+      info4: state.curInfo.info4,
+      load: state.curInfo.load
     }
   }
 export default connect(mapStateToProps, { getTumanlar,setChach,setInfo3 ,getBaholar})(Monitor_body)

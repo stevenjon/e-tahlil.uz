@@ -2,7 +2,7 @@ html,body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif !important;
 }
 :root {
   --main-color:#00B5E4; 
@@ -109,6 +109,7 @@ html,body {
   ul {
     list-style: none;
     display: flex;
+    align-items: center;
     flex-direction: row;
   }
   ul li {
@@ -119,9 +120,14 @@ html,body {
   padding: 16px 32px;
   background-color: white;
 }
+.monitor_calendar {
+  height: 30px;
+    
+}
 .monitor_content_head {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .monitor_body {
   display: flex;
@@ -154,9 +160,15 @@ html,body {
 .monitor_table th {
   font-size: 13px;
   padding:5px;
-  height: 68px;
+  height: 111px !important;
+  border: 1px solid #ddd;
+  text-align: center !important;
   box-sizing: border-box;
   font-weight: normal;
+}
+ul {
+  margin: 0 !important;
+  
 }
 .tuman_contentli {
   color: #7D7D7D;
@@ -228,7 +240,7 @@ input[type=number]:focus {
   background-color: #00B5E4;
   color: white;
   text-decoration: none;
-  padding: 10px 15px;
+  padding: 5px 10px;
   outline: none;
   position: relative;
   display: inline-block;
@@ -244,12 +256,16 @@ div[contenteditable="true"] {
   overflow-y: scroll;
   min-height: 200px;
   max-height: 200px;
+  font-size: 16px;
 }
 .badge {
   position: absolute;
   top: -7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   right: -10px;
-  padding: 2px 4px;
+  padding: 5px;
   border-radius: 50%;
   background-color: orange;
   color: white;
@@ -262,4 +278,144 @@ div[contenteditable="true"] {
   border: 1px solid #ccc;
   border-radius: 4px;
   box-sizing: border-box;
+}
+.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 8px;
+  box-sizing: border-box;
+  border: 32px solid #fff;
+  border-color: #fff transparent #fff transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right:0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+}
+.gg-arrow-top-right-r {
+  box-sizing: border-box;
+  position: relative;
+  display: block;
+  width: 22px;
+  height: 22px;
+  border: 2px solid;
+  transform: scale(var(--ggs,1));
+  border-radius: 4px
+ }
+ 
+ .gg-arrow-top-right-r::after,
+ .gg-arrow-top-right-r::before {
+  content: "";
+  display: block;
+  box-sizing: border-box;
+  position: absolute;
+  right: 4px
+ }
+ 
+ .gg-arrow-top-right-r::after {
+  width: 10px;
+  height: 2px;
+  background: currentColor;
+  transform: rotate(-45deg);
+  bottom: 8px
+ }
+ 
+ .gg-arrow-top-right-r::before {
+  width: 6px;
+  height: 6px;
+  top: 4px;
+  border-top: 2px solid;
+  border-right: 2px solid
+ } 
+ .link {
+   position: relative;
+   width: 15px;
+   left: 345px;
+   z-index: 1000;
+   top: 32px;
+   cursor: pointer;
+ }
+ a {
+   cursor: pointer;
+ }
+ .selcol {
+   position: absolute;
+   left: 380px;
+   top: 112px;
+ }
+ select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+}
+select {
+  padding:0 5px;
+}
+.col1 {
+  color: black;
+}
+.col2 {
+  color: red;
+}
+.col3 {
+  color: mediumseagreen;
+}
+.col4 {
+  color: orange;
+}
+.tox {
+  height: 300px !important;
+}
+.print_con {
+  width: 841px;
+  margin: 0 auto;
+  font-family: 'Times New Roman', Times, serif;
+  text-align: justify;
+  font-size: 17px;
+  border: 1px solid white;
+  padding: 10px;
+}
+ol {
+  margin: 0;
+}
+h3 {
+  margin: 2px;
+  font-weight: 600;
+}
+p {
+  margin: 0 !important;
 }

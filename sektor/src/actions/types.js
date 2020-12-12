@@ -14,3 +14,6 @@ export const GET_BAHOLAR = "GET_BAHOLAR";
 export const SET_CHACH = "SET_CHACH";
 export const SET_INFO = "SET_INFO";
 export const SET_HOTLINKS = "SET_HOTLINKS";
+export const SET_LOAD = "SET_LOAD"
+export const SET_PRINT = "SET_PRINT";
+export const SET_TASDIQ = "SET_TASDIQ"

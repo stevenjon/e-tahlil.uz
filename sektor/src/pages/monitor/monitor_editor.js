@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react'
-import { DefaultEditor } from 'react-simple-wysiwyg';
+import React, {useEffect, useState} from 'react'
+import { Editor } from '@tinymce/tinymce-react';
 import Buttonlar from './Buttonlar'
 import {connect} from 'react-redux'
 import {toast} from 'react-toastify'
@@ -8,7 +8,7 @@ import {setIz,closeModal} from '../../actions/userActions'
 import baseUrl from '../../baseUrl'
 import axios from 'axios'
 
-const Editor = ({setIz,iz, btn_iz,closeModal, hotlinks, getHotLinks}) => {
+const Editor1 = ({setIz,iz, btn_iz,closeModal, hotlinks, getHotLinks}) => {
     const [html, setHtml] = React.useState('');
     const [edit, setEdit] = React.useState(0);
     const [title, setTitle] = React.useState();
@@ -18,9 +18,6 @@ const Editor = ({setIz,iz, btn_iz,closeModal, hotlinks, getHotLinks}) => {
                 setHtml(iz[btn_iz])
             }   
     }, [])
-    const onChange = (e) => {
-      setHtml(e.target.value);
-    };
     const Add = (data) => {
         setHtml(html + data)
     }
@@ -120,6 +117,21 @@ const Editor = ({setIz,iz, btn_iz,closeModal, hotlinks, getHotLinks}) => {
                         console.error(err);
                     }   
     }
+    const addLink = ()=> {
+        let link = prompt("Ссилкани критинг"); 
+        if(link) {
+            if(link.includes("http")) {
+                link = link
+            }else {
+                link = 'http://'+link
+            }
+
+          const sliced = html.slice(0,-4) + `<a  href=${link} style='display: inline-block' target='_blank'><img src='/link.png'  width='20px'></img></a>`+'</p>';  
+            setHtml(sliced)
+        }
+        
+        
+    }
     let btns;
     if(btn_iz && hotlinks) {
         btns = hotlinks.filter((hot)=> hot.type === btn_iz);
@@ -141,21 +153,48 @@ const Editor = ({setIz,iz, btn_iz,closeModal, hotlinks, getHotLinks}) => {
             default:
                 break;
         }
+
+
+       
         return (
         <div>
         
             <h2 id="simple-modal-title" style={{fontWeight:"400"}}>{head}</h2>
             <div style={{display: "flex", justifyContent:"space-between"}}>
                 <div className="iz_btns">
-                    {edit !== 0 ?<input type='text' placeholder="Кнопка номи" value={title} onChange={(e)=> setTitle(e.target.value)} className="hot_input"/> : btns.map((btn, index)=> <Buttonlar Add={Add} key={index} btn={btn} setHtml={setHtml} setEdit={setEdit} setTitle={setTitle} setId={setId}></Buttonlar>)}
+                    {edit !== 0 ?<input style={{height: "40px"}} type='text' placeholder="Кнопка номи" value={title} onChange={(e)=> setTitle(e.target.value)} className="hot_input"/> : btns.map((btn, index)=> <Buttonlar Add={Add} key={index} btn={btn} setHtml={setHtml} setEdit={setEdit} setTitle={setTitle} setId={setId}></Buttonlar>)}
                 </div>
                 <div style={{display: "flex", alignItems:"center"}}>
                 <div onClick={()=> setEdit(1)} style={{color: "var(--main-color)", fontSize: "20px", marginRight:"10px", cursor:"pointer"}}><i class="fas fa-plus-square"></i></div>
                 
                 </div>
             </div>
-             <DefaultEditor style={{maxHeight:"230px", minHeight: "200px"}} value={html} onChange={onChange} />
-              
+            <div>
+            <div className="link" onClick={addLink}><i class="fas fa-link"></i></div>
+            
+                <Editor
+                    style={{minHeight: "50%"}}
+                    value={html}
+                    outputFormat='html'
+                    
+                    apiKey="5s5wv4wvh0agbh1msrx9iuw2k61cn12nrrgeulvxwat79o5r"
+                    init={{
+                        height: 500,
+                        
+                        menubar: false,
+                        menubar: 'file edit view format tools table help',
+                        plugins: [
+                        'print preview paste importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists wordcount imagetools textpattern noneditable help charmap emoticons'
+                        ],
+                        toolbar:
+                        'undo redo | bold italic underline strikethrough | fontselect fontsizeselect formatselect | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print |  ltr rtl'
+                    }}
+                    onEditorChange={(content)=> {
+                        setHtml(content)
+                    }
+                    }
+                    />
+              </div>
                   {edit == 0 ? ( <center><button onClick={addIz}  style={{marginTop: "10px"}} className="hot_btn">Сақлаш</button>
               <button onClick={closeModal}  style={{marginTop: "10px", marginLeft: '7%', backgroundColor: "#51686C"}} className="hot_btn">Бекор қилиш</button></center>): edit == 1 ? <center><button onClick={addHotLink}  style={{marginTop: "10px"}} className="hot_btn">Сақлаш</button>
               <button onClick={()=>setEdit(0)}  style={{marginTop: "10px", marginLeft: '7%', backgroundColor: "#51686C"}} className="hot_btn">Бекор қилиш</button></center>: <center><button onClick={upHotLink}  style={{marginTop: "10px"}} className="hot_btn">Сақлаш</button>
@@ -179,4 +218,4 @@ const mapStateToProps = (state)=> {
       hotlinks: state.curInfo.hotlinks
     }
   }
-export default connect(mapStateToProps, {setIz, closeModal,getHotLinks})(Editor)
+export default connect(mapStateToProps, {setIz, closeModal,getHotLinks})(Editor1)
